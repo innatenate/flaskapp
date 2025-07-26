@@ -25,10 +25,10 @@ body, html {
     transform: translate(-50%, -50%);
     text-align: center;
     color: white;
-    background-color: rgba(15, 28, 46, 0.85); /* dark blue translucent */
+    background-color: #070c14ec; /* dark blue translucent */
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 0 30px rgba(0, 0, 80, 0.4);
+    box-shadow: 0 0 30px rgba(0, 0, 29, 0.445);
     width: 90%;
     max-width: 500px;
 }
@@ -38,7 +38,7 @@ body, html {
     width: 200px;
     height: auto;
     border-radius: 12px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 7, 41, 0.2);
     margin-bottom: 20px;
 }
 
