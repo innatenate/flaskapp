@@ -8,7 +8,7 @@
       }
     },
     "color": {
-      "value": "#6fc3df"
+      "value": "#1a2b4c"
     },
     "shape": {
       "type": "circle",
@@ -18,25 +18,31 @@
       }
     },
     "opacity": {
-      "value": 0.4,
-      "random": true
+      "value": 0.3,
+      "random": true,
+      "anim": {
+        "enable": false
+      }
     },
     "size": {
-      "value": 3,
-      "random": true
+      "value": 4,
+      "random": true,
+      "anim": {
+        "enable": false
+      }
     },
     "line_linked": {
       "enable": true,
-      "distance": 150,
-      "color": "#5d9cec",
-      "opacity": 0.3,
+      "distance": 120,
+      "color": "#2c3e50",
+      "opacity": 0.25,
       "width": 1
     },
     "move": {
       "enable": true,
-      "speed": 1.2,
+      "speed": 0.8,
       "direction": "none",
-      "random": false,
+      "random": true,
       "straight": false,
       "out_mode": "out",
       "bounce": false
@@ -56,9 +62,9 @@
     },
     "modes": {
       "grab": {
-        "distance": 180,
+        "distance": 150,
         "line_linked": {
-          "opacity": 0.6
+          "opacity": 0.4
         }
       }
     }

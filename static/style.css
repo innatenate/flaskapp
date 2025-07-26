@@ -1,4 +1,3 @@
-/* Full-page base setup */
 body, html {
     margin: 0;
     padding: 0;
@@ -8,7 +7,6 @@ body, html {
     background-color: #0f1c2e;
 }
 
-/* Particles.js background canvas */
 #particles-js {
     position: absolute;
     width: 100%;
@@ -16,57 +14,51 @@ body, html {
     z-index: 0;
 }
 
-/* Centered content box */
-.content-box {
+.content {
     z-index: 1;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: white;
-    background-color: #070c14ec; /* dark blue translucent */
+    color: #ffffff;
+    background-color: #1c2e40; /* solid dark blue */
     padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(0, 0, 29, 0.445);
-    width: 90%;
-    max-width: 500px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+    width: 350px;
 }
 
-/* Bot image styling */
 .bot-image {
-    width: 200px;
+    width: 150px;
     height: auto;
     border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 7, 41, 0.2);
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
     margin-bottom: 20px;
 }
 
-/* Header and paragraph spacing */
 h1 {
+    font-size: 28px;
     margin-bottom: 10px;
-    font-size: 32px;
 }
 
 p {
-    font-size: 18px;
-    margin-bottom: 25px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #ccd6f6;
 }
 
-/* Styled connect button */
 .btn {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    background-color: #3498db;
     color: white;
-    padding: 14px 28px;
+    padding: 12px 24px;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 6px;
     font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 80, 0.3);
-    transition: all 0.3s ease;
+    transition: background-color 0.3s;
+    display: inline-block;
 }
 
 .btn:hover {
-    background: linear-gradient(135deg, #2a5298, #1e3c72);
-    transform: scale(1.05);
+    background-color: #2980b9;
 }
