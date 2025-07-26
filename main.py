@@ -38,6 +38,7 @@ def callback():
     auth = (CLIENT_ID, CLIENT_SECRET)
 
     token_response = requests.post(token_url, data=data, auth=auth)
+    print(token_response.text)
     if token_response.status_code != 200:
         return "Failed to get token."
 
