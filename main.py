@@ -1,7 +1,9 @@
 from flask import Flask, request, redirect, render_template
 import requests
 import os
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_folder="static", template_folder="templates")
 
 CLIENT_ID = os.getenv("BLIZZ_CLIENT_ID")
@@ -17,11 +19,12 @@ def authorize():
     auth_url = (
         f"https://oauth.battle.net/authorize"
         f"?client_id={CLIENT_ID}"
-        f"&redirect_uri={REDIRECT_URI}"
+        f"&redirect_uri={requests.utils.quote(REDIRECT_URI)}"
         f"&response_type=code"
         f"&scope=wow.profile"
     )
     return redirect(auth_url)
+
 
 @app.route("/callback")
 def callback():
