@@ -2,10 +2,15 @@ from flask import Flask, request, redirect, render_template
 import requests
 import os
 import logging
+import secrets
+from urllib.parse import quote
 
+# Enable debug-level logging
 logging.basicConfig(level=logging.DEBUG)
+
 app = Flask(__name__, static_folder="static", template_folder="templates")
 
+# Environment variables
 CLIENT_ID = os.getenv("BLIZZARD_CLIENT_ID")
 CLIENT_SECRET = os.getenv("BLIZZARD_CLIENT_SECRET")
 REDIRECT_URI = os.getenv("REDIRECT_URI")
@@ -16,15 +21,20 @@ def home():
 
 @app.route("/authorize")
 def authorize():
+    # Generate a secure random state string
+    state = secrets.token_urlsafe(16)
+
+    # Construct the Battle.net OAuth authorization URL
     auth_url = (
-        f"https://oauth.battle.net/authorize"
+        "https://oauth.battle.net/authorize"
         f"?client_id={CLIENT_ID}"
-        f"&redirect_uri={requests.utils.quote(REDIRECT_URI)}"
+        f"&redirect_uri={quote(REDIRECT_URI)}"
         f"&response_type=code"
         f"&scope=wow.profile"
+        f"&state={state}"
     )
-    return redirect(auth_url)
 
+    return redirect(auth_url)
 
 @app.route("/callback")
 def callback():
@@ -32,6 +42,7 @@ def callback():
     if not code:
         return "No code received."
 
+    # Exchange the authorization code for an access token
     token_url = "https://oauth.battle.net/token"
     data = {
         "grant_type": "authorization_code",
@@ -41,22 +52,28 @@ def callback():
     auth = (CLIENT_ID, CLIENT_SECRET)
 
     token_response = requests.post(token_url, data=data, auth=auth)
+
     if token_response.status_code != 200:
         print("TOKEN ERROR:", token_response.status_code)
         print("RESPONSE:", token_response.text)
         return "Failed to get token."
 
-    access_token = token_response.json()["access_token"]
+    access_token = token_response.json().get("access_token")
 
+    # Fetch the user's WoW profile
     profile_url = "https://us.api.blizzard.com/profile/user/wow"
     headers = {"Authorization": f"Bearer {access_token}"}
     params = {"namespace": "profile-us", "locale": "en_US"}
 
     profile_response = requests.get(profile_url, headers=headers, params=params)
+
     if profile_response.status_code != 200:
+        print("PROFILE ERROR:", profile_response.status_code)
+        print("RESPONSE:", profile_response.text)
         return "Failed to fetch profile."
 
-    return f"Profile fetched successfully! You can close this page."
+    profile_data = profile_response.json()
+    return f"Profile fetched successfully! You can close this page. {profile_data}"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
