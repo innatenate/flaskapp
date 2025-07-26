@@ -1,4 +1,4 @@
-/* Reset + base */
+/* Reset & base layout */
 * {
     margin: 0;
     padding: 0;
@@ -23,13 +23,15 @@ html, body {
     z-index: 0;
 }
 
-/* Content container */
+/* Centered content box with dark glowing theme */
 .content-box {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #162236;
+    background: rgba(13, 20, 34, 0.95);
+    border: 1px solid rgba(111, 195, 223, 0.15);
+    backdrop-filter: blur(8px);
     color: white;
     z-index: 1;
     padding: 40px 30px;
@@ -37,7 +39,7 @@ html, body {
     text-align: center;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 50px rgba(111, 195, 223, 0.2);
 }
 
 /* Bot image styling */
@@ -46,10 +48,10 @@ html, body {
     height: auto;
     border-radius: 16px;
     margin-bottom: 20px;
-    box-shadow: 0 0 16px rgba(111, 195, 223, 0.4);
+    box-shadow: 0 0 25px rgba(111, 195, 223, 0.35);
 }
 
-/* Header & paragraph */
+/* Header and paragraph styles */
 h1 {
     font-size: 32px;
     margin-bottom: 12px;
@@ -60,7 +62,7 @@ p {
     margin-bottom: 25px;
 }
 
-/* Connect button */
+/* Styled connect button */
 .btn {
     background: linear-gradient(135deg, #2a72a5, #195a8b);
     color: white;
