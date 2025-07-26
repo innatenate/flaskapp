@@ -1,4 +1,4 @@
-/* Reset + base setup */
+/* RESET + BASE */
 * {
     margin: 0;
     padding: 0;
@@ -9,12 +9,11 @@ html, body {
     height: 100%;
     width: 100%;
     font-family: 'Segoe UI', sans-serif;
-    background-color: #0b0a12; /* deep space black */
+    background-color: #0a0f1c;
     overflow: hidden;
-    color: #ffffff;
 }
 
-/* Particle canvas */
+/* PARTICLES BACKGROUND */
 #particles-js {
     position: fixed;
     top: 0;
@@ -24,63 +23,77 @@ html, body {
     z-index: 0;
 }
 
-/* Centered content container */
+/* CONTENT BOX */
 .content-box {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(28, 15, 45, 0.9); /* dark purple with slight transparency */
-    padding: 40px 32px;
-    border-radius: 16px;
-    box-shadow: 0 0 30px rgba(144, 97, 255, 0.3);
     z-index: 1;
-    text-align: center;
     width: 90%;
-    max-width: 480px;
-    backdrop-filter: blur(4px);
+    max-width: 500px;
+    padding: 40px 30px;
+    text-align: center;
+    color: #ffffff;
+
+    background-color: rgba(15, 20, 35, 0.6); /* Subtle translucent dark blue */
+    border-radius: 18px;
+    border: 1px solid rgba(111, 195, 223, 0.3);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.08),
+                0 0 60px rgba(111, 195, 223, 0.15);
+    backdrop-filter: blur(10px);
+
+    animation: fadeIn 1.5s ease;
 }
 
-/* Bot image styling */
+/* FADE-IN ANIMATION */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* BOT IMAGE */
 .bot-image {
     width: 180px;
     height: auto;
     border-radius: 16px;
-    margin-bottom: 24px;
-    box-shadow: 0 0 16px rgba(170, 107, 255, 0.4);
+    margin-bottom: 20px;
+    box-shadow: 0 0 16px rgba(111, 195, 223, 0.4);
 }
 
-/* Headline */
+/* HEADERS & TEXT */
 h1 {
-    font-size: 34px;
-    color: #d5baff;
+    font-size: 32px;
     margin-bottom: 12px;
 }
 
-/* Description */
 p {
     font-size: 18px;
-    color: #cfc1ff;
-    margin-bottom: 28px;
+    margin-bottom: 25px;
 }
 
-/* Connect button */
+/* CONNECT BUTTON */
 .btn {
-    background: linear-gradient(135deg, #9a4dff, #6f32c9);
+    background: linear-gradient(135deg, #2a72a5, #195a8b);
     color: white;
     padding: 14px 32px;
-    border: none;
+    text-decoration: none;
     border-radius: 10px;
     font-weight: bold;
     font-size: 16px;
-    text-decoration: none;
     display: inline-block;
-    box-shadow: 0 4px 14px rgba(155, 89, 255, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 40, 90, 0.4);
     transition: all 0.3s ease;
 }
 
 .btn:hover {
-    background: linear-gradient(135deg, #b567ff, #8450e3);
+    background: linear-gradient(135deg, #1e4f78, #16456b);
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(160, 110, 255, 0.6);
+    box-shadow: 0 6px 18px rgba(0, 80, 160, 0.5);
 }
