@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <title>Welcome to OmniBot</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body>
     <div id="particles-js"></div>
-    <div class="content">
+
+    <div class="content-box">
         <img src="https://i.ibb.co/1GfmTTKm/omni.png" alt="OmniBot" class="bot-image">
         <h1>Welcome</h1>
         <p>Link your character to get started</p>
         <a href="/authorize" class="btn">Connect with Battle.net</a>
     </div>
-    <script src="{{ url_for('static', filename='particles.js') }}"></script>
+
     <script>
-    particlesJS.load('particles-js', '{{ url_for('static', filename='particles-config.json') }}', function() {
-        console.log('particles.js loaded');
-    });
+        particlesJS.load('particles-js', '{{ url_for("static", filename="particles-config.json") }}', function() {
+            console.log('particles.js loaded');
+        });
     </script>
 </body>
 </html>

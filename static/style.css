@@ -1,47 +1,72 @@
+/* Full-page base setup */
 body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  height: 100%;
-  background: #0a192f;
-  color: #fff;
-  overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0f1c2e;
 }
+
+/* Particles.js background canvas */
 #particles-js {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
-.content {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+/* Centered content box */
+.content-box {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    background-color: rgba(15, 28, 46, 0.85); /* dark blue translucent */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 80, 0.4);
+    width: 90%;
+    max-width: 500px;
 }
-.frame {
-  padding: 10px;
-  border: 2px solid #0077ff;
-  border-radius: 10px;
-  display: inline-block;
-  background: #0e2a47;
-}
+
+/* Bot image styling */
 .bot-image {
-  width: 120px;
-  height: 120px;
-  border-radius: 10px;
+    width: 200px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
 }
-.auth-button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 24px;
-  background-color: #0077ff;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  transition: background 0.3s ease;
+
+/* Header and paragraph spacing */
+h1 {
+    margin-bottom: 10px;
+    font-size: 32px;
 }
-.auth-button:hover {
-  background-color: #005fcc;
+
+p {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+/* Styled connect button */
+.btn {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 14px 28px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 80, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #2a5298, #1e3c72);
+    transform: scale(1.05);
 }
