@@ -1,4 +1,4 @@
-/* Reset & base layout */
+/* Global reset and base styling */
 * {
     margin: 0;
     padding: 0;
@@ -11,9 +11,10 @@ html, body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #0b0c1a;
     overflow: hidden;
+    color: #ffffff;
 }
 
-/* Particle background layer */
+/* Particle background */
 #particles-js {
     position: fixed;
     top: 0;
@@ -23,48 +24,49 @@ html, body {
     z-index: 0;
 }
 
-/* Centered content box with dark glowing theme */
+/* Centered content box */
 .content-box {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(13, 20, 34, 0.95);
-    border: 1px solid rgba(111, 195, 223, 0.15);
-    backdrop-filter: blur(8px);
-    color: white;
+    background: rgba(28, 16, 46, 0.95); /* deep indigo with opacity */
+    border: 1px solid rgba(160, 120, 255, 0.15);
+    box-shadow: 0 0 40px rgba(160, 120, 255, 0.2);
     z-index: 1;
     padding: 40px 30px;
     border-radius: 18px;
     text-align: center;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 0 50px rgba(111, 195, 223, 0.2);
 }
 
-/* Bot image styling */
+/* Bot image */
 .bot-image {
     width: 180px;
     height: auto;
     border-radius: 16px;
     margin-bottom: 20px;
-    box-shadow: 0 0 25px rgba(111, 195, 223, 0.35);
+    box-shadow: 0 0 20px rgba(140, 90, 255, 0.4);
+    border: 2px solid rgba(160, 120, 255, 0.2);
 }
 
-/* Header and paragraph styles */
+/* Headers and text */
 h1 {
     font-size: 32px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    color: #d9d4f2;
 }
 
 p {
     font-size: 18px;
     margin-bottom: 25px;
+    color: #cfcdf5;
 }
 
-/* Styled connect button */
+/* Connect button */
 .btn {
-    background: linear-gradient(135deg, #2a72a5, #195a8b);
+    background: linear-gradient(135deg, #7e5ab8, #5b3ea1);
     color: white;
     padding: 14px 32px;
     text-decoration: none;
@@ -72,12 +74,12 @@ p {
     font-weight: bold;
     font-size: 16px;
     display: inline-block;
-    box-shadow: 0 4px 12px rgba(0, 40, 90, 0.4);
+    box-shadow: 0 4px 14px rgba(120, 90, 200, 0.4);
     transition: all 0.3s ease;
 }
 
 .btn:hover {
-    background: linear-gradient(135deg, #1e4f78, #16456b);
+    background: linear-gradient(135deg, #6c3fc1, #452f9e);
     transform: scale(1.05);
-    box-shadow: 0 6px 18px rgba(0, 80, 160, 0.5);
+    box-shadow: 0 6px 20px rgba(160, 120, 255, 0.5);
 }
