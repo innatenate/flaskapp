@@ -1,4 +1,4 @@
-/* Reset and base setup */
+/* Reset + base setup */
 * {
     margin: 0;
     padding: 0;
@@ -9,12 +9,12 @@ html, body {
     height: 100%;
     width: 100%;
     font-family: 'Segoe UI', sans-serif;
-    background-color: #0b0c1a;
+    background-color: #0b0a12; /* deep space black */
     overflow: hidden;
-    color: #e7f6ff;
+    color: #ffffff;
 }
 
-/* Particle.js canvas layer */
+/* Particle canvas */
 #particles-js {
     position: fixed;
     top: 0;
@@ -24,62 +24,63 @@ html, body {
     z-index: 0;
 }
 
-/* Centered glass-like content box */
+/* Centered content container */
 .content-box {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: rgba(28, 15, 45, 0.9); /* dark purple with slight transparency */
+    padding: 40px 32px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(144, 97, 255, 0.3);
     z-index: 1;
-    background: rgba(13, 30, 45, 0.85); /* soft deep blue glass */
-    border: 1px solid rgba(100, 200, 255, 0.15);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border-radius: 18px;
-    box-shadow: 0 0 30px rgba(100, 200, 255, 0.12);
-    padding: 40px 30px;
-    width: 90%;
-    max-width: 500px;
     text-align: center;
+    width: 90%;
+    max-width: 480px;
+    backdrop-filter: blur(4px);
 }
 
-/* Bot image */
+/* Bot image styling */
 .bot-image {
     width: 180px;
     height: auto;
     border-radius: 16px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 24px rgba(111, 195, 223, 0.4);
+    margin-bottom: 24px;
+    box-shadow: 0 0 16px rgba(170, 107, 255, 0.4);
 }
 
-/* Headings and paragraph */
+/* Headline */
 h1 {
-    font-size: 32px;
+    font-size: 34px;
+    color: #d5baff;
     margin-bottom: 12px;
 }
 
+/* Description */
 p {
     font-size: 18px;
-    margin-bottom: 25px;
-    color: #d6eaff;
+    color: #cfc1ff;
+    margin-bottom: 28px;
 }
 
 /* Connect button */
 .btn {
-    background: linear-gradient(135deg, #45aaf2, #1f72b2);
+    background: linear-gradient(135deg, #9a4dff, #6f32c9);
     color: white;
     padding: 14px 32px;
-    text-decoration: none;
+    border: none;
     border-radius: 10px;
     font-weight: bold;
     font-size: 16px;
+    text-decoration: none;
     display: inline-block;
-    box-shadow: 0 4px 12px rgba(0, 80, 160, 0.3);
+    box-shadow: 0 4px 14px rgba(155, 89, 255, 0.5);
     transition: all 0.3s ease;
 }
 
 .btn:hover {
-    background: linear-gradient(135deg, #3c92db, #175b91);
+    background: linear-gradient(135deg, #b567ff, #8450e3);
     transform: scale(1.05);
-    box-shadow: 0 6px 18px rgba(0, 120, 200, 0.4);
+    box-shadow: 0 6px 20px rgba(160, 110, 255, 0.6);
 }

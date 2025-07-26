@@ -18,9 +18,8 @@
         <a href="/authorize" class="btn">Connect with Battle.net</a>
     </div>
 
-    <!-- Particle.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-    <!-- Config and initialization -->
+    <!-- Local particle.js script -->
+    <script src="{{ url_for('static', filename='particles.js') }}"></script>
     <script>
         particlesJS.load('particles-js', "{{ url_for('static', filename='particles-config.json') }}", function () {
             console.log('particles.js config loaded');
