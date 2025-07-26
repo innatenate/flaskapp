@@ -54,4 +54,4 @@ def callback():
     return f"Profile fetched successfully! You can close this page."
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
