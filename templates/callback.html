@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Battle.net Linked</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% if error %}
+            <h1>⚠️ Error</h1>
+            <p>{{ error }}</p>
+        {% else %}
+            <h1>✅ Success!</h1>
+            <p>Your profile was successfully linked.</p>
+            <pre>{{ profile | tojson(indent=2) }}</pre>
+        {% endif %}
+    </div>
+</body>
+</html>

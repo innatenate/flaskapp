@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, render_template, url_for
 import requests
 import os
 
@@ -10,7 +10,7 @@ REDIRECT_URI = os.getenv("REDIRECT_URI")  # This must match the URI registered w
 
 @app.route("/")
 def home():
-    return "Authorization server is running."
+    return render_template("home.html")
 
 @app.route("/authorize")
 def authorize():
@@ -27,9 +27,8 @@ def authorize():
 def callback():
     code = request.args.get("code")
     if not code:
-        return "No code received."
+        return render_template("callback.html", error="No code received.")
 
-    # Exchange code for token
     token_url = "https://oauth.battle.net/token"
     data = {
         "grant_type": "authorization_code",
@@ -40,25 +39,21 @@ def callback():
 
     token_response = requests.post(token_url, data=data, auth=auth)
     if token_response.status_code != 200:
-        return "Failed to get token."
+        return render_template("callback.html", error="Failed to get token.")
 
     tokens = token_response.json()
     access_token = tokens["access_token"]
 
-    # Fetch WoW profile summary
     profile_url = "https://us.api.blizzard.com/profile/user/wow"
     headers = {"Authorization": f"Bearer {access_token}"}
     params = {"namespace": "profile-us", "locale": "en_US"}
 
     profile_response = requests.get(profile_url, headers=headers, params=params)
     if profile_response.status_code != 200:
-        return "Failed to fetch profile."
+        return render_template("callback.html", error="Failed to fetch profile.")
 
     profile_data = profile_response.json()
-
-    # TODO: Send this to your bot or store it
-    return f"Profile fetched. You can close this page. {profile_data}"
+    return render_template("callback.html", profile=profile_data)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
-
