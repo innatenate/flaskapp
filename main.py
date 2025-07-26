@@ -6,8 +6,8 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__, static_folder="static", template_folder="templates")
 
-CLIENT_ID = os.getenv("BLIZZ_CLIENT_ID")
-CLIENT_SECRET = os.getenv("BLIZZ_CLIENT_SECRET")
+CLIENT_ID = os.getenv("BLIZZARD_CLIENT_ID")
+CLIENT_SECRET = os.getenv("BLIZZARD_CLIENT_SECRET")
 REDIRECT_URI = os.getenv("REDIRECT_URI")
 
 @app.route("/")
