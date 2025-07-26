@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to OmniBot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="content">
+        <img src="https://i.ibb.co/1GfmTTKm/omni.png" alt="OmniBot" class="bot-image">
+        <h1>Welcome</h1>
+        <p>Link your character to get started</p>
+        <a href="/authorize" class="btn">Connect with Battle.net</a>
+    </div>
+    <script src="{{ url_for('static', filename='particles.js') }}"></script>
+    <script>
+    particlesJS.load('particles-js', '{{ url_for('static', filename='particles-config.json') }}', function() {
+        console.log('particles.js loaded');
+    });
+    </script>
+</body>
+</html>

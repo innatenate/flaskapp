@@ -1,16 +1,16 @@
-from flask import Flask, request, redirect, render_template, url_for
+from flask import Flask, request, redirect, render_template
 import requests
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", template_folder="templates")
 
 CLIENT_ID = os.getenv("BLIZZ_CLIENT_ID")
 CLIENT_SECRET = os.getenv("BLIZZ_CLIENT_SECRET")
-REDIRECT_URI = os.getenv("REDIRECT_URI")  # This must match the URI registered with Blizzard
+REDIRECT_URI = os.getenv("REDIRECT_URI")
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("index.html")
 
 @app.route("/authorize")
 def authorize():
@@ -27,7 +27,7 @@ def authorize():
 def callback():
     code = request.args.get("code")
     if not code:
-        return render_template("callback.html", error="No code received.")
+        return "No code received."
 
     token_url = "https://oauth.battle.net/token"
     data = {
@@ -39,10 +39,9 @@ def callback():
 
     token_response = requests.post(token_url, data=data, auth=auth)
     if token_response.status_code != 200:
-        return render_template("callback.html", error="Failed to get token.")
+        return "Failed to get token."
 
-    tokens = token_response.json()
-    access_token = tokens["access_token"]
+    access_token = token_response.json()["access_token"]
 
     profile_url = "https://us.api.blizzard.com/profile/user/wow"
     headers = {"Authorization": f"Bearer {access_token}"}
@@ -50,10 +49,9 @@ def callback():
 
     profile_response = requests.get(profile_url, headers=headers, params=params)
     if profile_response.status_code != 200:
-        return render_template("callback.html", error="Failed to fetch profile.")
+        return "Failed to fetch profile."
 
-    profile_data = profile_response.json()
-    return render_template("callback.html", profile=profile_data)
+    return f"Profile fetched successfully! You can close this page."
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    app.run()
