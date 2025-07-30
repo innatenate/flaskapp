@@ -1,13 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Success</title>
-  <link rel="stylesheet" href="/static/styles.css" />
+    <meta charset="UTF-8">
+    <title>OmniBot - Linked</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <div class="content">
-    <h1>✅ You're linked!</h1>
-    <p>Your Battle.net data has been received. You may now close this tab.</p>
-  </div>
+    <!-- Particle background -->
+    <div id="particles-js"></div>
+
+    <!-- Centered content box -->
+    <div class="content-box">
+        <img src="{{ url_for('static', filename='omni.png') }}" alt="OmniBot" class="bot-image">
+        <h1>You're all set!</h1>
+        <p>This window will close automatically.</p>
+    </div>
+
+    <!-- Particle.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        particlesJS.load('particles-js', "{{ url_for('static', filename='particles-config.json') }}", function () {
+            console.log('particles.js config loaded');
+        });
+
+        // Auto-close after delay
+        setTimeout(() => {
+            window.close();
+        }, 2500);
+    </script>
 </body>
 </html>

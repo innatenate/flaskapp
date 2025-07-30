@@ -4,6 +4,7 @@ import os
 import logging
 import secrets
 from urllib.parse import quote
+import json
 
 # Enable debug-level logging
 logging.basicConfig(level=logging.DEBUG)
@@ -14,6 +15,7 @@ app = Flask(__name__, static_folder="static", template_folder="templates")
 CLIENT_ID = os.getenv("BLIZZARD_CLIENT_ID")
 CLIENT_SECRET = os.getenv("BLIZZARD_CLIENT_SECRET")
 REDIRECT_URI = os.getenv("REDIRECT_URI")
+FASTAPI_WEBHOOK_URL = os.getenv("FASTAPI_WEBHOOK_URL")  # e.g., https://your-fastapi.up.railway.app/onboard
 
 @app.route("/")
 def home():
@@ -21,17 +23,21 @@ def home():
 
 @app.route("/authorize")
 def authorize():
-    # Generate a secure random state string
     state = secrets.token_urlsafe(16)
+    discord_id = request.args.get("discord_id")  # from the bot’s link
 
-    # Construct the Battle.net OAuth authorization URL
+    if not discord_id:
+        return "Missing Discord ID", 400
+
+    # Store the Discord ID in session or temp file/db if needed
+
     auth_url = (
         "https://oauth.battle.net/authorize"
         f"?client_id={CLIENT_ID}"
         f"&redirect_uri={quote(REDIRECT_URI)}"
         f"&response_type=code"
         f"&scope=wow.profile"
-        f"&state={state}"
+        f"&state={discord_id}"  # embed discord ID into state
     )
 
     return redirect(auth_url)
@@ -39,10 +45,12 @@ def authorize():
 @app.route("/callback")
 def callback():
     code = request.args.get("code")
-    if not code:
-        return "No code received."
+    discord_id = request.args.get("state")  # retrieved from the original request
 
-    # Exchange the authorization code for an access token
+    if not code or not discord_id:
+        return "Missing code or Discord ID", 400
+
+    # Exchange code for access token
     token_url = "https://oauth.battle.net/token"
     data = {
         "grant_type": "authorization_code",
@@ -60,7 +68,7 @@ def callback():
 
     access_token = token_response.json().get("access_token")
 
-    # Fetch the user's WoW profile
+    # Fetch user profile
     profile_url = "https://us.api.blizzard.com/profile/user/wow"
     headers = {"Authorization": f"Bearer {access_token}"}
     params = {"namespace": "profile-us", "locale": "en_US"}
@@ -73,7 +81,20 @@ def callback():
         return "Failed to fetch profile."
 
     profile_data = profile_response.json()
-    return f"Profile fetched successfully! You can close this page. {profile_data}"
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    characters = profile_data.get("wow_accounts", [])[0].get("characters", [])
+
+    # Send character list to FastAPI
+    try:
+        payload = {
+            "discord_id": int(discord_id),
+            "characters": characters  # Pass full character objects directly
+        }
+
+
+        requests.post(FASTAPI_WEBHOOK_URL, json=payload)
+    except Exception as e:
+        logging.error(f"Error sending data to FastAPI: {e}")
+        return "Failed to send data to bot."
+
+    return render_template("callback.html", characters=payload["characters"])
